@@ -9,28 +9,78 @@ Orca のエディタタブで、Vim のキーバインドが使えるように�
 
 ## インストール
 
-前提: Orca が起動していて、プラグインが有効になっていること（設定 → Plugins → 「Turn on plugins」）。
+### 前提
+
+- Orca が起動していること。
+- プラグインが有効になっていること（設定 → Plugins → 「Turn on plugins」）。
+- 非公開リポジトリから入れる場合は、Orca を動かしている PC で Git の認証が通っていること（例: `gh auth setup-git`）。
+
+### 手順
+
+**1. インストールコマンドを実行する**
 
 ```sh
 orca plugin install akirat28/orca-vim-plugin
 ```
 
-実行すると、付与される権限（`sandboxed-ui`: 開いたファイルの内容を読むエディタ）と公開元が表示され、承認が必要なため一度止まります（終了コード 3）。表示内容を確認し、問題なければ表示された `--approve` 付きのコマンドをそのまま実行してください。
+このプラグインはコードを実行するエディタ（`sandboxed-ui`）のため、Orca は承認なしにはインストールしません。次のような表示が出て、**何もインストールされないまま**止まります（終了コード 3）。これは正常な動作です。
 
-```sh
-orca plugin install akirat28/orca-vim-plugin --approve ap1-xxxxxxxx   # ap1-... は実際に表示された値
+```
+akirat28.vim-editor 0.1.0 needs approval before it can run.
+Approving Vim Editor (akirat28.vim-editor 0.1.0) grants:
+- Shows its own code in sandboxed panels or editors inside Orca; an editor reads every file it opens.
+Adds: customEditors "Vim", customEditors "Vim", ...
+Source: github.com/akirat28/orca-vim-plugin at commit xxxxxxxxxxxx.
+Publisher: akirat28.
+...
+Fingerprint: ap1-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+Next step: To approve, run: orca plugin install akirat28/orca-vim-plugin --approve ap1-xxxxxxxx...
+Next step: Nothing was installed.
 ```
 
-バージョンを固定する場合:
+**2. 表示内容を確認する**
+
+| 項目 | 確認すること |
+|---|---|
+| Source / Publisher | `github.com/akirat28/orca-vim-plugin`、公開元が `akirat28` であること |
+| grants | 付与される権限が「サンドボックス内で動くエディタ。開いたファイルの内容を読む」のみであること（ネットワーク、ターミナル操作、ファイル書き込みなどの権限は含まれません） |
+| Adds | `customEditors "Vim"` が 13 件並ぶこと |
+| 警告文 | 「Orca が検証していないリポジトリ」という警告は、公式カタログ以外からの場合に必ず出る定型文です。公開元を信頼できる場合のみ続行してください |
+
+**3. フィンガープリント付きのコマンドで承認する**
+
+`Fingerprint:`（`ap1-` で始まる文字列）は、「このプラグイン・このバージョン・このファイル・この権限」に紐づく承認コードです。表示された値を、そのまま `--approve` に指定して再実行します。
+
+```sh
+orca plugin install akirat28/orca-vim-plugin --approve ap1-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+```
+
+- フィンガープリントは、**実際に表示された値**を使ってください。この README の `ap1-xxxx…` はダミーです。
+- バージョン、ファイル、権限のいずれかが変わると、フィンガープリントも変わります。更新時は、もう一度確認して承認し直す必要があります。
+- 表示されていない値を、他の人から聞いたものなどで指定しないでください。
+
+**4. インストールを確認する**
+
+```sh
+orca plugin list      # akirat28.vim-editor が表示されれば OK
+```
+
+Vim で開くファイルのタブを、一度閉じて開き直すと、Vim エディタで開きます。
+
+### バージョンを固定する場合
 
 ```sh
 orca plugin install akirat28/orca-vim-plugin@v0.1.0
 ```
 
-確認:
+（タグが無い場合は、`main` の最新コミットに固定されます。）同様に承認が必要です。
+
+### 開発版が読み込まれている場合
+
+同じエディタが重複して登録されるのを避けるため、先に開発版を外してください。
 
 ```sh
-orca plugin list      # *.vim-editor が表示されれば OK
+orca plugin dev unload <プラグインのフォルダのパス>
 ```
 
 ### 更新
@@ -38,6 +88,8 @@ orca plugin list      # *.vim-editor が表示されれば OK
 ```sh
 orca plugin update
 ```
+
+新しいバージョンに権限や内容の変更があると、再度の承認（新しいフィンガープリント）を求められます。表示内容を確認して、同じ手順で `--approve` を指定してください。
 
 ## アンインストール
 
