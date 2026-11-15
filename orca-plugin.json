@@ -1,0 +1,203 @@
+{
+  "manifestVersion": 2,
+  "id": "orca-vim",
+  "name": "Vim Editor",
+  "version": "0.1.0",
+  "description": "Vim keybindings (CodeMirror 6 + codemirror-vim) for files in Orca's editor tab.",
+  "engines": {
+    "orca": ">=1.4.248"
+  },
+  "execution": "sandboxed-ui",
+  "pluginApi": 1,
+  "contributes": {
+    "customEditors": [
+      {
+        "id": "vim-js",
+        "title": "Vim",
+        "extensions": [
+          ".js",
+          ".mjs",
+          ".cjs",
+          ".jsx"
+        ],
+        "entry": "editor/langs/js.ts",
+        "priority": "default",
+        "frame": "isolated"
+      },
+      {
+        "id": "vim-ts",
+        "title": "Vim",
+        "extensions": [
+          ".ts",
+          ".mts",
+          ".cts",
+          ".tsx"
+        ],
+        "entry": "editor/langs/ts.ts",
+        "priority": "default",
+        "frame": "isolated"
+      },
+      {
+        "id": "vim-json",
+        "title": "Vim",
+        "extensions": [
+          ".json",
+          ".jsonc",
+          ".json5"
+        ],
+        "entry": "editor/langs/json.ts",
+        "priority": "default",
+        "frame": "isolated"
+      },
+      {
+        "id": "vim-markdown",
+        "title": "Vim",
+        "extensions": [
+          ".md",
+          ".markdown",
+          ".mdx"
+        ],
+        "entry": "editor/langs/markdown.ts",
+        "priority": "default",
+        "frame": "isolated"
+      },
+      {
+        "id": "vim-python",
+        "title": "Vim",
+        "extensions": [
+          ".py",
+          ".pyi"
+        ],
+        "entry": "editor/langs/python.ts",
+        "priority": "default",
+        "frame": "isolated"
+      },
+      {
+        "id": "vim-css",
+        "title": "Vim",
+        "extensions": [
+          ".css",
+          ".scss",
+          ".less"
+        ],
+        "entry": "editor/langs/css.ts",
+        "priority": "default",
+        "frame": "isolated"
+      },
+      {
+        "id": "vim-html",
+        "title": "Vim",
+        "extensions": [
+          ".html",
+          ".htm",
+          ".vue",
+          ".svelte"
+        ],
+        "entry": "editor/langs/html.ts",
+        "priority": "default",
+        "frame": "isolated"
+      },
+      {
+        "id": "vim-yaml",
+        "title": "Vim",
+        "extensions": [
+          ".yml",
+          ".yaml"
+        ],
+        "entry": "editor/langs/yaml.ts",
+        "priority": "default",
+        "frame": "isolated"
+      },
+      {
+        "id": "vim-rust",
+        "title": "Vim",
+        "extensions": [
+          ".rs"
+        ],
+        "entry": "editor/langs/rust.ts",
+        "priority": "default",
+        "frame": "isolated"
+      },
+      {
+        "id": "vim-go",
+        "title": "Vim",
+        "extensions": [
+          ".go"
+        ],
+        "entry": "editor/langs/go.ts",
+        "priority": "default",
+        "frame": "isolated"
+      },
+      {
+        "id": "vim-xml",
+        "title": "Vim",
+        "extensions": [
+          ".xml",
+          ".svg",
+          ".plist"
+        ],
+        "entry": "editor/langs/xml.ts",
+        "priority": "default",
+        "frame": "isolated"
+      },
+      {
+        "id": "vim-sql",
+        "title": "Vim",
+        "extensions": [
+          ".sql"
+        ],
+        "entry": "editor/langs/sql.ts",
+        "priority": "default",
+        "frame": "isolated"
+      },
+      {
+        "id": "vim-plain",
+        "title": "Vim",
+        "extensions": [
+          ".txt",
+          ".log",
+          ".conf",
+          ".ini",
+          ".toml",
+          ".sh",
+          ".zsh",
+          ".bash",
+          ".rb",
+          ".java",
+          ".c",
+          ".h",
+          ".cpp",
+          ".hpp",
+          ".swift",
+          ".kt",
+          ".lua",
+          ".vim",
+          ".cfg",
+          ".csv",
+          ".tsv",
+          ".diff",
+          ".patch",
+          ".php",
+          ".pl",
+          ".cs",
+          ".dart",
+          ".ex",
+          ".exs",
+          ".zig"
+        ],
+        "entry": "editor/langs/plain.ts",
+        "priority": "default",
+        "frame": "isolated",
+        "filenames": [
+          ".env",
+          ".gitignore",
+          ".zshrc",
+          ".bashrc",
+          ".vimrc",
+          "Makefile",
+          "Dockerfile"
+        ]
+      }
+    ]
+  }
+}
