@@ -13,9 +13,11 @@ export type MountOptions = {
   onChange(text: string): void
   onWrite(): void
   onNotify(message: string): void
+  onQuit(force: boolean): void
 }
 export function mountVim(opts: MountOptions): {
   focus(): void
+  getText(): string
   setText(next: string): void
   setReadOnly(v: boolean): void
   setTypography(t: Typography): void

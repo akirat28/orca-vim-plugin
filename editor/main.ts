@@ -46,6 +46,10 @@ export async function run(language: string): Promise<void> {
     timer = setTimeout(() => toast.classList.remove('show'), 2200)
   }
 
+  // The text as last known to be in step with Orca/disk: the opening text, a file change from
+  // outside, or what a save/flush sent. `:q!` goes back to it.
+  let baseline = doc.value
+
   const editor = mountVim({
     parent: root,
     text: doc.value,
@@ -59,10 +63,25 @@ export async function run(language: string): Promise<void> {
         (e: unknown) => notify(`反映に失敗: ${String((e as { code?: string })?.code ?? e)}`)
       )
     },
-    onNotify: notify
+    onNotify: notify,
+    onQuit: (force) => {
+      if (force) {
+        editor.setText(baseline)
+        doc.change(baseline)
+        doc.flush().catch(() => undefined)
+        notify('変更を破棄しました。タブは Cmd/Ctrl+W で閉じてください')
+      } else if (editor.getText() !== baseline) {
+        notify('E37: 最後の保存後に変更があります（:q! で破棄）')
+      } else {
+        notify('タブは Cmd/Ctrl+W で閉じてください')
+      }
+    }
   })
 
-  doc.onReplace((value) => editor.setText(value))
+  doc.onReplace((value) => {
+    baseline = value
+    editor.setText(value)
+  })
 
   const applyDark = () => editor.setDark(document.documentElement.classList.contains('dark'))
   applyDark()
@@ -81,7 +100,10 @@ export async function run(language: string): Promise<void> {
   }
 
   // Let a pending edit reach Orca before it saves.
-  orca.on('editor.flush', () => doc.flush().catch(() => undefined))
+  orca.on('editor.flush', () => {
+    baseline = editor.getText()
+    doc.flush().catch(() => undefined)
+  })
 
   editor.focus()
 }
