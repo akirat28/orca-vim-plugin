@@ -246,4 +246,5 @@ npm i -D esbuild codemirror @codemirror/state @codemirror/view @codemirror/comma
 
 ## ライセンス
 
-同梱している CodeMirror と `@replit/codemirror-vim` はいずれも MIT ライセンスです。
+このプラグインは [MIT ライセンス](LICENSE) です。
+同梱している CodeMirror 6 と `@replit/codemirror-vim` などは、いずれも MIT ライセンスです。表記は [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) を参照してください。
