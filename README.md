@@ -30,7 +30,7 @@ orca plugin install akirat28/orca-vim-plugin@v0.1.0
 確認:
 
 ```sh
-orca plugin list      # *.orca-vim が表示されれば OK
+orca plugin list      # *.vim-editor が表示されれば OK
 ```
 
 ### 更新
@@ -42,7 +42,7 @@ orca plugin update
 ## アンインストール
 
 ```sh
-orca plugin list                       # プラグインキーを確認（例: akirat28.orca-vim）
+orca plugin list                       # プラグインキーを確認（例: akirat28.vim-editor）
 orca plugin uninstall <プラグインキー>
 ```
 
