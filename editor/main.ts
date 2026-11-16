@@ -61,8 +61,13 @@ export async function run(language: string): Promise<void> {
     dark: document.documentElement.classList.contains('dark'),
     onChange: (text) => doc.change(text),
     onWrite: () => {
+      const written = editor.getText()
       doc.flush().then(
-        () => notify('変更を反映しました（ディスクへの保存は Cmd/Ctrl+S）'),
+        () => {
+          // What was just sent is now the reference for :q / :q!.
+          baseline = written
+          notify('変更を反映しました（ディスクへの保存は Cmd/Ctrl+S）')
+        },
         (e: unknown) => notify(`反映に失敗: ${String((e as { code?: string })?.code ?? e)}`)
       )
     },
