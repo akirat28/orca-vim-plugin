@@ -6,7 +6,7 @@ Orca のエディタタブで、Vim のキーバインドが使えるように�
 - ノーマル / 挿入 / ビジュアルモード、オペレータ + モーション、テキストオブジェクト、`.` リピート、レジスタ、マクロ、`/` 検索、`:s` 置換など
 - Orca のテーマ（ライト / ダーク）とエディタのフォント設定に追従
 - 設定画面で配色テーマや、キーワード・文字列・コメントなどの色を変更可能
-- 構文ハイライト: JavaScript / TypeScript / JSON / Markdown / Python / CSS / HTML / YAML / Rust / Go / XML / SQL
+- 構文ハイライト: JavaScript / TypeScript / JSON / Markdown / Python / CSS / HTML / YAML / Rust / Go / Perl / XML / SQL
 
 ## インストール
 
@@ -121,7 +121,7 @@ orca plugin enable <プラグインキー>
 
 **自動で Vim で開く拡張子**
 
-`.js` `.mjs` `.cjs` `.jsx` / `.tsx` `.mts` `.cts` / `.jsonc` `.json5` / `.markdown` `.mdx` / `.py` `.pyi` / `.css` `.scss` `.less` / `.html` `.htm` `.vue` `.svelte` / `.yml` / `.rs` / `.go` / `.xml` `.svg` `.plist` / `.sql` / `.txt` `.log` `.conf` `.ini` `.toml` `.sh` `.zsh` `.bash` `.rb` `.java` `.c` `.h` `.cpp` `.hpp` `.swift` `.kt` `.lua` `.vim` `.cfg` `.tsv` `.diff` `.patch` `.php` `.pl` `.cs` `.dart` `.ex` `.exs` `.zig` `.cgi`
+`.js` `.mjs` `.cjs` `.jsx` / `.tsx` `.mts` `.cts` / `.jsonc` `.json5` / `.markdown` `.mdx` / `.py` `.pyi` / `.css` `.scss` `.less` / `.html` `.htm` `.vue` `.svelte` / `.yml` / `.rs` / `.go` / `.pl` `.pm` `.cgi` / `.xml` `.svg` `.plist` / `.sql` / `.txt` `.log` `.conf` `.ini` `.toml` `.sh` `.zsh` `.bash` `.rb` `.java` `.c` `.h` `.cpp` `.hpp` `.swift` `.kt` `.lua` `.vim` `.cfg` `.tsv` `.diff` `.patch` `.php` `.cs` `.dart` `.ex` `.exs` `.zig`
 
 ファイル名: `.env` `.gitignore` `.zshrc` `.bashrc` `.vimrc` `Makefile` `Dockerfile`
 

@@ -144,6 +144,19 @@
         "icon": "assets/icon.png"
       },
       {
+        "id": "vim-perl",
+        "title": "Vim",
+        "extensions": [
+          ".pl",
+          ".pm",
+          ".cgi"
+        ],
+        "entry": "editor/langs/perl.ts",
+        "priority": "default",
+        "frame": "isolated",
+        "icon": "assets/icon.png"
+      },
+      {
         "id": "vim-xml",
         "title": "Vim",
         "extensions": [
@@ -195,13 +208,11 @@
           ".diff",
           ".patch",
           ".php",
-          ".pl",
           ".cs",
           ".dart",
           ".ex",
           ".exs",
-          ".zig",
-          ".cgi"
+          ".zig"
         ],
         "entry": "editor/langs/plain.ts",
         "priority": "default",

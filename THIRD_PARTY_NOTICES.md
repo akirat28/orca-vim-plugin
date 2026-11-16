@@ -3,7 +3,7 @@
 `editor/vendor/cm.js` is a bundle of the following MIT-licensed packages.
 Each is distributed under the license text below.
 
-- CodeMirror 6 (`codemirror`, `@codemirror/state`, `@codemirror/view`, `@codemirror/commands`,
+- CodeMirror 6 (`codemirror`, `@codemirror/legacy-modes`, `@codemirror/state`, `@codemirror/view`, `@codemirror/commands`,
   `@codemirror/language`, `@codemirror/search`, `@codemirror/theme-one-dark`, `@codemirror/lang-*`)
   and the Lezer parser packages (`@lezer/*`) it depends on
   Copyright (C) Marijn Haverbeke <marijn@haverbeke.berlin> and others
