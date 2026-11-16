@@ -14,8 +14,8 @@ export async function run(language: string): Promise<void> {
     .cm-editor { height: 100%; color: var(--orca-foreground); background: var(--orca-background); }
     .cm-editor.cm-focused { outline: none; }
     .cm-scroller { font-family: ui-monospace, Menlo, monospace;
-      scrollbar-color: color-mix(in srgb, var(--orca-muted-foreground) 45%, transparent) var(--orca-background); }
-    .cm-scroller::-webkit-scrollbar-corner { background: var(--orca-background); }
+      scrollbar-color: var(--vim-sb-thumb, #8888) var(--vim-sb-track, transparent); }
+    .cm-scroller::-webkit-scrollbar-corner { background: var(--vim-sb-track, transparent); }
     .cm-gutters { background: var(--orca-background); color: var(--orca-muted-foreground); border: 0; }
     .cm-activeLine, .cm-activeLineGutter { background: color-mix(in srgb, var(--orca-accent) 55%, transparent); }
     .cm-cursor, .cm-dropCursor { border-left-color: var(--orca-foreground); }
@@ -95,6 +95,9 @@ export async function run(language: string): Promise<void> {
     const dark = document.documentElement.classList.contains('dark')
     // Native widgets (scrollbars) follow color-scheme, not the theme class.
     document.documentElement.style.colorScheme = dark ? 'dark' : 'light'
+    // Dark theme: dark scrollbar; light theme: light scrollbar.
+    document.documentElement.style.setProperty('--vim-sb-track', dark ? '#1e1e1e' : '#f5f5f5')
+    document.documentElement.style.setProperty('--vim-sb-thumb', dark ? '#555555' : '#c4c4c4')
     editor.setDark(dark)
   }
   applyDark()
