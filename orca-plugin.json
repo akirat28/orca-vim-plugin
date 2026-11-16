@@ -9,6 +9,11 @@
   },
   "execution": "sandboxed-ui",
   "pluginApi": 1,
+  "capabilities": [
+    {
+      "kind": "settings:own"
+    }
+  ],
   "contributes": {
     "customEditors": [
       {
@@ -195,7 +200,8 @@
           ".dart",
           ".ex",
           ".exs",
-          ".zig"
+          ".zig",
+          ".cgi"
         ],
         "entry": "editor/langs/plain.ts",
         "priority": "default",
@@ -210,6 +216,110 @@
           "Dockerfile"
         ],
         "icon": "assets/icon.png"
+      }
+    ],
+    "settings": [
+      {
+        "key": "highlight.enabled",
+        "title": "シンタックスハイライト",
+        "description": "オフにすると、テキストを色付けせずに表示します。",
+        "type": "boolean",
+        "default": true
+      },
+      {
+        "key": "highlight.theme",
+        "title": "配色テーマ",
+        "description": "「Orca に合わせる」は、Orca がダークなら One Dark、ライトなら CodeMirror 標準の配色を使います。",
+        "type": "string",
+        "default": "auto",
+        "enum": [
+          "auto",
+          "one-dark",
+          "light",
+          "github-light",
+          "github-dark",
+          "solarized"
+        ],
+        "enumLabels": [
+          "Orca に合わせる",
+          "One Dark",
+          "ライト（CodeMirror 標準）",
+          "GitHub 風ライト",
+          "GitHub 風ダーク",
+          "Solarized 風"
+        ]
+      },
+      {
+        "key": "color.keyword",
+        "title": "色: キーワード",
+        "description": "配色テーマの色を上書きします。#rrggbb などの CSS の色を指定します。空欄ならテーマの色を使います。",
+        "type": "string",
+        "default": "",
+        "maxLength": 64,
+        "placeholder": "#c678dd"
+      },
+      {
+        "key": "color.string",
+        "title": "色: 文字列",
+        "description": "配色テーマの色を上書きします。#rrggbb などの CSS の色を指定します。空欄ならテーマの色を使います。",
+        "type": "string",
+        "default": "",
+        "maxLength": 64,
+        "placeholder": "#98c379"
+      },
+      {
+        "key": "color.comment",
+        "title": "色: コメント",
+        "description": "配色テーマの色を上書きします。#rrggbb などの CSS の色を指定します。空欄ならテーマの色を使います。",
+        "type": "string",
+        "default": "",
+        "maxLength": 64,
+        "placeholder": "#7f848e"
+      },
+      {
+        "key": "color.number",
+        "title": "色: 数値",
+        "description": "配色テーマの色を上書きします。#rrggbb などの CSS の色を指定します。空欄ならテーマの色を使います。",
+        "type": "string",
+        "default": "",
+        "maxLength": 64,
+        "placeholder": "#d19a66"
+      },
+      {
+        "key": "color.function",
+        "title": "色: 関数名",
+        "description": "配色テーマの色を上書きします。#rrggbb などの CSS の色を指定します。空欄ならテーマの色を使います。",
+        "type": "string",
+        "default": "",
+        "maxLength": 64,
+        "placeholder": "#61afef"
+      },
+      {
+        "key": "color.type",
+        "title": "色: 型・クラス名",
+        "description": "配色テーマの色を上書きします。#rrggbb などの CSS の色を指定します。空欄ならテーマの色を使います。",
+        "type": "string",
+        "default": "",
+        "maxLength": 64,
+        "placeholder": "#e5c07b"
+      },
+      {
+        "key": "color.property",
+        "title": "色: プロパティ・属性名",
+        "description": "配色テーマの色を上書きします。#rrggbb などの CSS の色を指定します。空欄ならテーマの色を使います。",
+        "type": "string",
+        "default": "",
+        "maxLength": 64,
+        "placeholder": "#e06c75"
+      },
+      {
+        "key": "color.tag",
+        "title": "色: タグ名（HTML / XML）",
+        "description": "配色テーマの色を上書きします。#rrggbb などの CSS の色を指定します。空欄ならテーマの色を使います。",
+        "type": "string",
+        "default": "",
+        "maxLength": 64,
+        "placeholder": "#e06c75"
       }
     ]
   },

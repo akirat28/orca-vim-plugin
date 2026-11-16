@@ -1,5 +1,6 @@
 import { mountVim } from './vendor/cm.js'
 import { start } from './sync'
+import { readHighlight } from './settings'
 
 /** Mounts the Vim editor for one language group. Called by editor/langs/<language>.ts. */
 export async function run(language: string): Promise<void> {
@@ -12,7 +13,9 @@ export async function run(language: string): Promise<void> {
     #vim-root { position: fixed; inset: 0; }
     .cm-editor { height: 100%; color: var(--orca-foreground); background: var(--orca-background); }
     .cm-editor.cm-focused { outline: none; }
-    .cm-scroller { font-family: ui-monospace, Menlo, monospace; }
+    .cm-scroller { font-family: ui-monospace, Menlo, monospace;
+      scrollbar-color: color-mix(in srgb, var(--orca-muted-foreground) 45%, transparent) var(--orca-background); }
+    .cm-scroller::-webkit-scrollbar-corner { background: var(--orca-background); }
     .cm-gutters { background: var(--orca-background); color: var(--orca-muted-foreground); border: 0; }
     .cm-activeLine, .cm-activeLineGutter { background: color-mix(in srgb, var(--orca-accent) 55%, transparent); }
     .cm-cursor, .cm-dropCursor { border-left-color: var(--orca-foreground); }
@@ -83,7 +86,12 @@ export async function run(language: string): Promise<void> {
     editor.setText(value)
   })
 
-  const applyDark = () => editor.setDark(document.documentElement.classList.contains('dark'))
+  const applyDark = () => {
+    const dark = document.documentElement.classList.contains('dark')
+    // Native widgets (scrollbars) follow color-scheme, not the theme class.
+    document.documentElement.style.colorScheme = dark ? 'dark' : 'light'
+    editor.setDark(dark)
+  }
   applyDark()
   orca.on('theme', applyDark)
 
@@ -106,4 +114,22 @@ export async function run(language: string): Promise<void> {
   })
 
   editor.focus()
+
+  // Colours come last and are not awaited, so a slow settings read never delays the flush
+  // handler or focus.
+  const applySettings = async () => {
+    const { highlight, invalid } = readHighlight(await orca.settings.get(), (v) => CSS.supports('color', v))
+    editor.setHighlight(highlight)
+    if (invalid.length > 0) {
+      notify(`色の指定が無効なため無視しました: ${invalid.join(', ')}`)
+    }
+  }
+  try {
+    orca.settings.onDidChange(() => {
+      applySettings().catch(() => undefined)
+    })
+  } catch {
+    // Settings are cosmetic; keep the default colours if they cannot be read.
+  }
+  applySettings().catch(() => undefined)
 }

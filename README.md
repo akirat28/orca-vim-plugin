@@ -5,6 +5,7 @@ Orca のエディタタブで、Vim のキーバインドが使えるように�
 
 - ノーマル / 挿入 / ビジュアルモード、オペレータ + モーション、テキストオブジェクト、`.` リピート、レジスタ、マクロ、`/` 検索、`:s` 置換など
 - Orca のテーマ（ライト / ダーク）とエディタのフォント設定に追従
+- 設定画面で配色テーマや、キーワード・文字列・コメントなどの色を変更可能
 - 構文ハイライト: JavaScript / TypeScript / JSON / Markdown / Python / CSS / HTML / YAML / Rust / Go / XML / SQL
 
 ## インストール
@@ -29,6 +30,7 @@ orca plugin install akirat28/orca-vim-plugin
 akirat28.vim-editor 0.1.0 needs approval before it can run.
 Approving Vim Editor (akirat28.vim-editor 0.1.0) grants:
 - Shows its own code in sandboxed panels or editors inside Orca; an editor reads every file it opens.
+- Read and change the plugin's own settings
 Adds: customEditors "Vim", customEditors "Vim", ...
 Source: github.com/akirat28/orca-vim-plugin at commit xxxxxxxxxxxx.
 Publisher: akirat28.
@@ -43,7 +45,7 @@ Next step: Nothing was installed.
 | 項目 | 確認すること |
 |---|---|
 | Source / Publisher | `github.com/akirat28/orca-vim-plugin`、公開元が `akirat28` であること |
-| grants | 付与される権限が「サンドボックス内で動くエディタ。開いたファイルの内容を読む」のみであること（ネットワーク、ターミナル操作、ファイル書き込みなどの権限は含まれません） |
+| grants | 付与される権限が「サンドボックス内で動くエディタ。開いたファイルの内容を読む」と「このプラグイン自身の設定の読み書き」のみであること（ネットワーク、ターミナル操作、ファイル書き込みなどの権限は含まれません） |
 | Adds | `customEditors "Vim"` が 13 件並ぶこと |
 | 警告文 | 「Orca が検証していないリポジトリ」という警告は、公式カタログ以外からの場合に必ず出る定型文です。公開元を信頼できる場合のみ続行してください |
 
@@ -119,7 +121,7 @@ orca plugin enable <プラグインキー>
 
 **自動で Vim で開く拡張子**
 
-`.js` `.mjs` `.cjs` `.jsx` / `.tsx` `.mts` `.cts` / `.jsonc` `.json5` / `.markdown` `.mdx` / `.py` `.pyi` / `.css` `.scss` `.less` / `.html` `.htm` `.vue` `.svelte` / `.yml` / `.rs` / `.go` / `.xml` `.svg` `.plist` / `.sql` / `.txt` `.log` `.conf` `.ini` `.toml` `.sh` `.zsh` `.bash` `.rb` `.java` `.c` `.h` `.cpp` `.hpp` `.swift` `.kt` `.lua` `.vim` `.cfg` `.tsv` `.diff` `.patch` `.php` `.pl` `.cs` `.dart` `.ex` `.exs` `.zig`
+`.js` `.mjs` `.cjs` `.jsx` / `.tsx` `.mts` `.cts` / `.jsonc` `.json5` / `.markdown` `.mdx` / `.py` `.pyi` / `.css` `.scss` `.less` / `.html` `.htm` `.vue` `.svelte` / `.yml` / `.rs` / `.go` / `.xml` `.svg` `.plist` / `.sql` / `.txt` `.log` `.conf` `.ini` `.toml` `.sh` `.zsh` `.bash` `.rb` `.java` `.c` `.h` `.cpp` `.hpp` `.swift` `.kt` `.lua` `.vim` `.cfg` `.tsv` `.diff` `.patch` `.php` `.pl` `.cs` `.dart` `.ex` `.exs` `.zig` `.cgi`
 
 ファイル名: `.env` `.gitignore` `.zshrc` `.bashrc` `.vimrc` `Makefile` `Dockerfile`
 
@@ -131,6 +133,18 @@ orca plugin enable <プラグインキー>
 2. `i` で挿入モードに入って入力し、`Esc`（または `jj`）でノーマルモードに戻ります。
 3. 編集内容は自動で Orca に反映されます。`:w` で即時に反映できます。
 4. **ディスクへの保存は Orca の保存（Cmd/Ctrl+S）で行います。**
+
+### 設定（色付け）
+
+Orca の設定 → Plugins → Vim Editor で変更できます。変更は開いているエディタにすぐ反映されます。
+
+| 設定 | 内容 |
+|---|---|
+| シンタックスハイライト | オフにすると色付けしません |
+| 配色テーマ | Orca に合わせる（既定。ダークなら One Dark、ライトなら CodeMirror 標準）/ One Dark / ライト（CodeMirror 標準）/ GitHub 風ライト / GitHub 風ダーク / Solarized 風 |
+| 色: キーワード、文字列、コメント、数値、関数名、型・クラス名、プロパティ・属性名、タグ名 | 配色テーマの色を要素ごとに上書きします。`#c678dd` や `rgb(...)`、`orange` など CSS の色で指定します。空欄ならテーマの色のまま、無効な値は無視して通知します |
+
+Vim で開く拡張子は設定では変更できません（Orca がエディタにファイル名を渡さないため）。拡張子を増やす場合は `orca-plugin.json` の `customEditors` を編集します。
 
 ## 対応している Vim コマンド
 
@@ -229,19 +243,15 @@ orca plugin test .
 orca plugin check .
 ```
 
-`editor/vendor/cm.js` は、CodeMirror を esbuild でバンドルした成果物です。バンドル元の `cm-entry.ts`（`vendor-src/` 内、Git 管理外）はこのリポジトリにはまだ含まれていません。作り直す場合の手順（`cm-entry.ts` は自分で用意）:
+`editor/vendor/cm.js` は、`vendor-src/cm-entry.ts` を esbuild でバンドルした成果物です（型定義は `editor/vendor/cm.d.ts`。両方を揃えて変更します）。作り直す手順:
 
 ```sh
-mkdir vendor-src && cd vendor-src
-npm init -y
-npm i -D esbuild codemirror @codemirror/state @codemirror/view @codemirror/commands \
-  @codemirror/language @codemirror/search @codemirror/theme-one-dark @replit/codemirror-vim \
-  @codemirror/lang-javascript @codemirror/lang-json @codemirror/lang-markdown @codemirror/lang-python \
-  @codemirror/lang-css @codemirror/lang-html @codemirror/lang-yaml @codemirror/lang-rust \
-  @codemirror/lang-go @codemirror/lang-xml @codemirror/lang-sql
-# cm-entry.ts を置いて:
-./node_modules/.bin/esbuild cm-entry.ts --bundle --format=esm --minify --target=es2022 --outfile=../editor/vendor/cm.js
+cd vendor-src
+npm ci
+npm run build    # 型チェック → バンドル → サイズ確認
 ```
+
+`vendor-src/node_modules` がある間は、`orca plugin inspect .` とフォルダからのインストールが「symlink not allowed」で失敗します（開発版の読み込みと、GitHub からのインストールには影響しません）。必要なら `rm -rf vendor-src/node_modules` で消してください。
 
 `cm.js` は 1 MiB を超えないようにしてください（Orca の変換ファイルサイズ上限）。
 
