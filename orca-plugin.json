@@ -2,7 +2,7 @@
   "manifestVersion": 2,
   "id": "vim-editor",
   "name": "Vim Editor",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Vim keybindings (CodeMirror 6 + codemirror-vim) for files in Orca's editor tab.",
   "engines": {
     "orca": ">=1.4.248"
