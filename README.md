@@ -6,7 +6,7 @@ Orca のエディタタブで、Vim のキーバインドが使えるように�
 - ノーマル / 挿入 / ビジュアルモード、オペレータ + モーション、テキストオブジェクト、`.` リピート、レジスタ、マクロ、`/` 検索、`:s` 置換など
 - Orca のテーマ（ライト / ダーク）とエディタのフォント設定に追従
 - 設定画面で配色テーマや、キーワード・文字列・コメントなどの色を変更可能
-- 構文ハイライト: JavaScript / TypeScript / JSON / Markdown / Python / CSS / HTML / YAML / Rust / Go / Perl / XML / SQL
+- 構文ハイライト: JavaScript / TypeScript / JSON / Markdown / Python / CSS / HTML / YAML / Rust / Go / Perl / XML / SQL / PHP
 
 ## インストール
 
@@ -46,7 +46,7 @@ Next step: Nothing was installed.
 |---|---|
 | Source / Publisher | `github.com/akirat28/orca-vim-plugin`、公開元が `akirat28` であること |
 | grants | 付与される権限が「サンドボックス内で動くエディタ。開いたファイルの内容を読む」と「このプラグイン自身の設定の読み書き」のみであること（ネットワーク、ターミナル操作、ファイル書き込みなどの権限は含まれません） |
-| Adds | `customEditors "Vim"` が 13 件並ぶこと |
+| Adds | `customEditors "Vim"` が 15 件並ぶこと |
 | 警告文 | 「Orca が検証していないリポジトリ」という警告は、公式カタログ以外からの場合に必ず出る定型文です。公開元を信頼できる場合のみ続行してください |
 
 **3. フィンガープリント付きのコマンドで承認する**

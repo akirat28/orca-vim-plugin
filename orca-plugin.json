@@ -181,6 +181,17 @@
         "icon": "assets/icon.png"
       },
       {
+        "id": "vim-php",
+        "title": "Vim",
+        "extensions": [
+          ".php"
+        ],
+        "entry": "editor/langs/php.ts",
+        "priority": "default",
+        "frame": "isolated",
+        "icon": "assets/icon.png"
+      },
+      {
         "id": "vim-plain",
         "title": "Vim",
         "extensions": [
@@ -207,7 +218,6 @@
           ".tsv",
           ".diff",
           ".patch",
-          ".php",
           ".cs",
           ".dart",
           ".ex",

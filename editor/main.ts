@@ -27,7 +27,6 @@ export async function run(language: string): Promise<void> {
     .cm-vim-panel { padding: 2px 10px; }
     .cm-vim-panel input { background: transparent; color: inherit; border: 0; outline: 0; font: inherit; }
     .cm-searchMatch { background: color-mix(in srgb, var(--orca-primary) 30%, transparent); }
-    .cm-matchingBracket { background: color-mix(in srgb, var(--orca-primary) 30%, transparent); }
     html.dark .cm-content { caret-color: var(--orca-foreground); }
     #toast { position: fixed; right: 12px; bottom: 36px; padding: 4px 10px; border-radius: 6px;
       background: var(--orca-popover); color: var(--orca-popover-foreground); font: 12px system-ui;

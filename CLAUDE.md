@@ -25,7 +25,7 @@ vendor-src/node_modules/.bin/tsc -p . --noEmit   # editor/ の型チェック（
 
 ## アーキテクチャ
 
-**エントリの仕組み**: `orca-plugin.json` の `customEditors` が言語グループごとに 14 個あり（すべて `title: "Vim"`）、それぞれ `editor/langs/<lang>.ts` を entry に持つ。各 entry は `await run('<lang>')` の 1 行だけ。言語を追加するときは「マニフェストのエントリ」「`langs/*.ts`」「`cm.js` 内の `T5()` の switch」の 3 か所を揃える必要があり、最後の 1 か所はバンドルの再生成が必要。`vim-plain`（言語 `plain` → ハイライトなし）は多数の拡張子と `filenames`（`.env`、`Makefile` など）を受け持つ。
+**エントリの仕組み**: `orca-plugin.json` の `customEditors` が言語グループごとに 15 個あり（すべて `title: "Vim"`）、それぞれ `editor/langs/<lang>.ts` を entry に持つ。各 entry は `await run('<lang>')` の 1 行だけ。言語を追加するときは「マニフェストのエントリ」「`langs/*.ts`」「`cm.js` 内の `languageFor()` の switch」の 3 か所を揃える必要があり、最後の 1 か所はバンドルの再生成が必要。`vim-plain`（言語 `plain` → ハイライトなし）は多数の拡張子と `filenames`（`.env`、`Makefile` など）を受け持つ。
 
 **`editor/main.ts`**: DOM・CSS の準備（色はすべて `--orca-*` CSS 変数）、`mountVim()` の呼び出し、Orca との配線を行う。
 - 編集 → `onChange` → `doc.change(text)` で Orca に逐次反映する。ディスクへの保存は Orca 側（Cmd/Ctrl+S）。
